@@ -1,4 +1,4 @@
-/* (C) Games24x7 */
+/* (C) Shashank Shekhar : Lucipurr Inc. */
 package misc;
 
 import java.util.stream.Stream;
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class ProgressBar {
   private static final Logger logger = LoggerFactory.getLogger(ProgressBar.class);
-  private final int length = 100;
+
   String message;
   int maxSteps;
   private int processed = 0;
@@ -18,6 +18,7 @@ public class ProgressBar {
   }
 
   public void printMsgWithProgressBar() {
+    final int length = 100;
     char incomplete = '░'; // U+2591 Unicode Character
     char complete = '█'; // U+2588 Unicode Character
     StringBuilder builder = new StringBuilder();
@@ -27,12 +28,9 @@ public class ProgressBar {
       builder.replace(i, i + 1, String.valueOf(complete));
     }
     String progressBar = "\r" + builder;
-    logger.info("{} {} : ({}% {}/{} Steps Completed)", 
-        progressBar, 
-        message, 
-        ((double) processed * 100 / maxSteps),
-        processed,
-        maxSteps);
+    logger.info(
+        "{} {} : ({}% {}/{} Steps Completed)",
+        progressBar, message, ((double) processed * 100 / maxSteps), processed, maxSteps);
   }
 
   public void stepUp() {
@@ -47,5 +45,4 @@ public class ProgressBar {
       progressBar.printMsgWithProgressBar();
     }
   }
-
 }
